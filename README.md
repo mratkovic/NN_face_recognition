@@ -27,12 +27,3 @@ Neural Networks ( 127251) course project 16/17
 * [LFW](http://vis-www.cs.umass.edu/lfw/) - standard benchmark.
 
 
-
-~
-~
-~
-~
-~
-~
-~
-
