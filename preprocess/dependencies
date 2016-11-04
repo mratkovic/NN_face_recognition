@@ -1,0 +1,10 @@
+sudo apt-get install python3-pip
+sudo apt-get install cmake
+sudo apt-get install libboost-all-dev
+pip3 install dlib
+
+
+isntall opencv
+
+download and extract
+http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
