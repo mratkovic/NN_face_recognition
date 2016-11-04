@@ -12,7 +12,8 @@ def get_faces(image_name, output_folder, output_dimension=128, landmarkIndices=c
 	image = cv2.imread(image_name)
 
 	detected_faces = __face_detector(image, 1)
-
+	#print("detected faces", len(detected_faces))
+	
 	images = []
 	for i, face_rect in enumerate(detected_faces):
 		pose_landmarks = __face_pose_predictor(image, face_rect)

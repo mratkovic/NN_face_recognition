@@ -22,18 +22,17 @@ import image_preprocess
 origin_folder = sys.argv[1]
 destination_folder = sys.argv[2]
 
-#files = [origin_folder+"/"+f for f in listdir(origin_folder) if isfile(join(origin_folder, f))]
-
 import glob
 
 files = glob.glob(origin_folder+"/**/*.jpg", recursive=True)
-
+#print(files)
 
 for f in files:
 	output_folder = destination_folder + "/" + f[len(origin_folder)+1:f.rfind("/")+1]
-	print("folder:", output_folder)
+	#print("folder:", output_folder)
 	if not os.path.exists(output_folder):
 	    	os.makedirs(output_folder)
 	
-	print("result:", image_preprocess.get_faces(f, output_folder))
+	result = image_preprocess.get_faces(f, output_folder)
+	#print("result:", result)
 	
