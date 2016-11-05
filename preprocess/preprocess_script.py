@@ -1,5 +1,4 @@
 import sys
-import os
 
 if "help" in sys.argv or len(sys.argv) < 3:
 	print("<======================>USAGE<=========================================>")
@@ -15,24 +14,27 @@ if "help" in sys.argv or len(sys.argv) < 3:
 	exit()
 
 
-from os import listdir
-from os.path import isfile, join
 import image_preprocess
+
+import glob
+import os
+from os.path import join, relpath, dirname
 
 origin_folder = sys.argv[1]
 destination_folder = sys.argv[2]
 
-import glob
 
 files = glob.glob(origin_folder+"/**/*.jpg", recursive=True)
 #print(files)
 
 for f in files:
-	output_folder = destination_folder + "/" + f[len(origin_folder)+1:f.rfind("/")+1]
+	#output_folder = destination_folder + "/" + f[len(origin_folder)+1:f.rfind("/")+1]
+	output_folder = join(destination_folder, dirname(relpath(f, origin_folder))) 
+	
 	#print("folder:", output_folder)
 	if not os.path.exists(output_folder):
 	    	os.makedirs(output_folder)
 	
-	result = image_preprocess.get_faces(f, output_folder)
+	result = image_preprocess.save_faces(f, output_folder)
 	#print("result:", result)
 	
