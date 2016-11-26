@@ -41,12 +41,15 @@ def get_faces(image_path, output_dimension=128, landmarkIndices=constants.OUTER_
 	return images
 
 
-def save_faces(image_path, output_folder, output_dimension=128, landmarkIndices=constants.OUTER_EYES_AND_NOSE):
+def save_faces(image_path, output_folder, output_dimension=128, landmarkIndices=constants.OUTER_EYES_AND_NOSE, extension='.png'):
 	images = get_faces(image_path, output_dimension, landmarkIndices)
 	
 	image_paths = []
 	for i, image in enumerate(images):
-		base, extension = splitext(basename(image_path))
+		base, ext = splitext(basename(image_path))
+		if extension is None: 
+			extension = ext
+		
 		new_image_name = "{}_{}{}".format(base, i, extension)
 		new_image_path = join(output_folder, new_image_name)
 		cv2.imwrite(new_image_path, image) 

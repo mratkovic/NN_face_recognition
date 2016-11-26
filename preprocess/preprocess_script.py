@@ -25,13 +25,13 @@ destination_folder = sys.argv[2]
 
 
 files = glob.glob(origin_folder+"/**/*.jpg", recursive=True)
-#print(files)
+size = len(files)
+print('Total: ', size)
 
-for f in files:
-	#output_folder = destination_folder + "/" + f[len(origin_folder)+1:f.rfind("/")+1]
+for i, f in enumerate(files):
+
+	if i%1000 == 0: print('Progress: {}/{}'.format(i, size))
 	output_folder = join(destination_folder, dirname(relpath(f, origin_folder))) 
-	
-	#print("folder:", output_folder)
 	if not os.path.exists(output_folder):
 	    	os.makedirs(output_folder)
 	
