@@ -1,10 +1,5 @@
 import sys
 import time
-import image_preprocess
-import glob
-import os
-from os.path import join, relpath, dirname
-
 
 if "help" in sys.argv or len(sys.argv) < 3:
 	print("<======================>USAGE<=========================================>")
@@ -20,12 +15,17 @@ if "help" in sys.argv or len(sys.argv) < 3:
 	exit()
 
 
+import image_preprocess
+
+import glob
+import os
+from os.path import join, relpath, dirname
 
 origin_folder = sys.argv[1]
 destination_folder = sys.argv[2]
 
 
-files = sorted(glob.glob(origin_folder+"/**/*.jpg", recursive=True))
+files = glob.glob(origin_folder+"/**/*.jpg", recursive=True)
 size = len(files)
 print('Total: ', size)
 
@@ -33,21 +33,20 @@ print('Total: ', size)
 batch_start_time = start_time = time.time()
 for i, f in enumerate(files):
 
-	if i%250 == 0: 
+	if i%1000 == 0: 
 		current = time.time()
 		batch_time = current - batch_start_time
 		elapsed = current - start_time
 
-		print('\n\nProgress: {}/{}; batch_time: {}; total_time: {}\n'.format(i, size, batch_time, elapsed))
+		print('Progress: {}/{}; batch_time: {}; total_time: {}'.format(i, size, batch_time, elapsed))
 		batch_start_time = time.time()
 
 
 	output_folder = join(destination_folder, dirname(relpath(f, origin_folder))) 
 	if not os.path.exists(output_folder):
 	    	os.makedirs(output_folder)
-	print("{}/{}\t{}".format(i, size, f))
-	result = image_preprocess.save_faces(f, output_folder)
 	
+	result = image_preprocess.save_faces(f, output_folder)
 
 
 print("Completed...")
