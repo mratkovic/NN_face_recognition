@@ -1,0 +1,4 @@
+LFW benchmark (10 folds)
+Accuracy: 0.908+-0.010
+
+AUC: 0.969
